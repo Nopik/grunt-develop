@@ -65,6 +65,15 @@ module.exports = (grunt) ->
   grunt.registerTask 'default', ['develop']
 ```
 
+You may need to pass
+
+```coffeescript
+  env:
+    PATH: process.env[ 'PATH' ]
+```
+
+if your application exists immediately with code 127. It may be caused by the fact that coffee cannot find node in its default path.
+
 ## A more complex Gruntfile.js
 
  To support auto-reload on changes, for example:
@@ -81,6 +90,8 @@ module.exports = function(grunt) {
           'lib/*.js'
         ],
         tasks: ['develop'],
+        killSignal: 'SIGHUP',
+        logPrefix: '',
         options: { nospawn: true }
       }
     },
